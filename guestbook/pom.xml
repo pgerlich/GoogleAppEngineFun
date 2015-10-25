@@ -23,6 +23,11 @@
 
     <dependencies>
         <!-- Compile/runtime dependencies -->
+		<dependency>
+			<groupId>com.googlecode.objectify</groupId>
+			<artifactId>objectify</artifactId>
+			<version>4.0.1</version>
+		</dependency>
         <dependency>
             <groupId>com.google.appengine</groupId>
             <artifactId>appengine-api-1.0-sdk</artifactId>
@@ -124,10 +129,6 @@
                 <set_default>true</set_default>
               </configuration>
             </plugin>
-			    <plugin>
-            <groupId>com.google.appengine</groupId>
-            <artifactId>appengine-maven-plugin</artifactId>
-        </plugin>
         </plugins>
     </build>
 </project>
