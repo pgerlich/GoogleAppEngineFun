@@ -3,7 +3,7 @@
 <datastore-indexes>
 
     <!-- Used 7 times in query history -->
-    <datastore-index kind="Greeting" ancestor="true" source="auto">
+    <datastore-index kind="Greeting" ancestor="true" source="manual">
         <property name="date" direction="desc"/>
     </datastore-index>
 
