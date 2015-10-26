@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<!-- Filters -->
+	<filter>
+	  <filter-name>ObjectifyFilter</filter-name>
+	  <filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+	  <filter-name>ObjectifyFilter</filter-name>
+	  <url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- Listeners -->
+	<listener>
+	  <listener-class>com.gss.todolist.helpers.ObjectifyHelper</listener-class>
+	</listener>
+	
+	<!-- Servlets -->
+		<!-- Task Servlets -->
+		<servlet>
+		  <servlet-name>newtask</servlet-name>
+		  <servlet-class>com.gss.todolist.servlets.task.NewTaskServlet</servlet-class>
+		</servlet>
+
+		<servlet-mapping>
+		  <servlet-name>newtask</servlet-name>
+		  <url-pattern>/newtask</url-pattern>
+		</servlet-mapping> 
+		
+		<servlet>
+		  <servlet-name>completetask</servlet-name>
+		  <servlet-class>com.gss.todolist.servlets.task.CompleteTaskServlet</servlet-class>
+		</servlet>
+
+		<servlet-mapping>
+		  <servlet-name>completetask</servlet-name>
+		  <url-pattern>/completetask</url-pattern>
+		</servlet-mapping> 
+		
+		<servlet>
+		  <servlet-name>updatetask</servlet-name>
+		  <servlet-class>com.gss.todolist.servlets.task.UpdateTaskServlet</servlet-class>
+		</servlet>
+
+		<servlet-mapping>
+		  <servlet-name>updatetask</servlet-name>
+		  <url-pattern>/updatetask</url-pattern>
+		</servlet-mapping> 
+		
+		<!-- Mail Servlet -->
+		<servlet>
+		  <servlet-name>mailtasks</servlet-name>
+		  <servlet-class>com.gss.todolist.servlets.mail.MailAllTasks</servlet-class>
+		</servlet>
+
+		<servlet-mapping>
+		  <servlet-name>mailtasks</servlet-name>
+		  <url-pattern>/mailtasks</url-pattern>
+		</servlet-mapping> 
+		
+    <!-- <servlet> TODO: Fix categories if possible
+      <servlet-name>newcategory</servlet-name>
+      <servlet-class>com.gss.todolist.servlets.category.NewCategoryServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+      <servlet-name>newcategory</servlet-name>
+      <url-pattern>/newcategory</url-pattern>
+    </servlet-mapping> -->
+
+	
+	<!-- Index file(s) -->
+	<welcome-file-list>
+		<welcome-file>home.jsp</welcome-file>
+	</welcome-file-list>
+	
+</web-app>

@@ -1,0 +1,134 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<!-- Google/Standard Imports -->
+<%@ page import="com.google.appengine.api.users.User" %>
+<%@ page import="com.google.appengine.api.users.UserService" %>
+<%@ page import="com.google.appengine.api.users.UserServiceFactory" %>
+<%@ page import="com.googlecode.objectify.Key" %>
+<%@ page import="com.googlecode.objectify.ObjectifyService" %>
+<%@ page import="java.util.List" %>
+
+<!-- Custom imports -->
+<%@ page import="com.gss.todolist.TaskList" %>
+<%@ page import="com.gss.todolist.Task" %>
+
+
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<html>
+	<head>
+		<!-- Bootstrap -->	
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+	
+		<!-- JQuery -->
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">	
+	</head>
+
+	<body>
+
+		<%
+			UserService userService = UserServiceFactory.getUserService();
+			User user = userService.getCurrentUser();
+			
+			//Force sign in for use of the service
+			if ( user == null ) {
+		%>
+
+				<p>You are not signed in. You must <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">Sign in</a> to continue</p>
+			
+		<%
+			} else {
+				pageContext.setAttribute("user", user);
+				pageContext.setAttribute("userId", user.getUserId());
+		%>
+
+				<p>Welcome, ${fn:escapeXml(user.nickname)}! (<a href="<%= userService.createLogoutURL(request.getRequestURI()) %>">sign out</a>.)</p>
+				
+				
+		<%
+			//Grab each task category for this user
+			Iterable<TaskList> categories = ObjectifyService.ofy()
+			.load()
+			.type(TaskList.class);
+		%>
+		
+		<!-- Begin Nav tabs -->
+		<div>
+			<ul class="nav nav-tabs" role="tablist">
+
+		<%
+				for (TaskList category : categories) {
+					pageContext.setAttribute("tabName", category.mName);
+					pageContext.setAttribute("tabId", category.mId);
+		%>
+					<li role="presentation">
+						<a href="#${fn:escapeXml(tabName)}" aria-controls="home" role="tab" data-toggle="tab" >${fn:escapeXml(tabName)}</a>
+					</li>
+					
+		<%
+				}
+		%>
+
+					<!-- Add category tab -->
+					<li role="presentation">
+						<a href="#" id="openAddCategory"aria-controls="home" role="tab" data-toggle="tab">(+ New Category)</a>
+					</li>
+				</ul>
+			</div>
+
+		<% 	} 	%>
+		
+		<!-- Add Category Dialog -->
+		<div id="add-category-form" title="Create/Update Category">
+
+		  <form method="post" action="/newcategory">
+			  <label for="name">Category Name</label>
+			  <input type="text" name="categoryName" value="My Category" class="text ui-widget-content ui-corner-all">
+			  <input type="hidden" value="${fn:escapeXml(userId)}" name="userId"/>
+		 
+			  <input type="submit" value="Add">
+		  </form>
+		</div>
+
+		<!-- Add Task Dialog -->
+		<div id="add-task-form" title="Create/Update Task">
+
+		  <form method="post" action="/newtask">
+			  <label for="name">Task Name</label>
+			  <input type="text" name="name" value="My Category" class="text ui-widget-content ui-corner-all"><br />
+			  <label for="name">Task Priority</label>
+			  
+			  <input type="text" name="name" value="My Category" class="text ui-widget-content ui-corner-all"><br />
+			  <input type="hidden" value="${fn:escapeXml(TaskListId)}" name="TaskListId"/>
+		 
+			  <input type="submit" value="Add Task">
+		  </form>
+		</div>
+
+		<!-- Bootstrap -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
+		<!-- JQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+		<script>
+		$(function() {
+			//Setup dialogs
+			$( "#add-category-form" ).dialog({
+			   autoOpen: false,  
+			});
+			
+			$( "#add-task-form" ).dialog({
+			   autoOpen: false,  
+			});
+			
+			//onClick listener to activate category dialog
+			$( "#openAddCategory" ).click(function() {
+			   $( "#add-category-form" ).dialog( "open" );
+			});
+		});
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,8 @@
+com\gss\todolist\servlets\task\NewTaskServlet.class
+com\gss\todolist\servlets\task\CompleteTaskServlet.class
+com\gss\todolist\servlets\mail\MailAllTasks.class
+com\gss\todolist\servlets\category\NewCategoryServlet.class
+com\gss\todolist\helpers\ObjectifyHelper.class
+com\gss\todolist\objects\TaskList.class
+com\gss\todolist\servlets\task\UpdateTaskServlet.class
+com\gss\todolist\objects\Task.class
