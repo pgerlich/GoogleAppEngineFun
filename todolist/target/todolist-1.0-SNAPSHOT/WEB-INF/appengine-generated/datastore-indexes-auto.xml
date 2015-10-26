@@ -1,8 +1,8 @@
-<!-- Indices written at Mon, 26 Oct 2015 03:02:11 CDT -->
+<!-- Indices written at Mon, 26 Oct 2015 03:34:36 CDT -->
 
 <datastore-indexes>
 
-    <!-- Used 4 times in query history -->
+    <!-- Used 1 time in query history -->
     <datastore-index kind="Task" ancestor="false" source="auto">
         <property name="mUserId" direction="asc"/>
         <property name="mPriority" direction="desc"/>

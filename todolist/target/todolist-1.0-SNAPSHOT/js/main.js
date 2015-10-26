@@ -23,7 +23,7 @@ $(function() {
 
 //Function for adding a new task
 function addTask(){
-	var content = $("#content").val();
+	var content = $("#content").val().replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
 	var priority = $("#priority").val();
 	
 	$.post( "/newtask", { content: content, priority: priority })

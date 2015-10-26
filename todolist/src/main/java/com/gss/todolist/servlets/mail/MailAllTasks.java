@@ -39,7 +39,7 @@ public class MailAllTasks extends HttpServlet {
     
 	//Grab each task
 	List<Task> tasks = ObjectifyService.ofy().load().type(Task.class).order("-mPriority").filter("mUserId", user.getUserId()).list();
-	String msgBody = "";
+	String msgBody = "test";
 	
 	for (Task t : tasks ) {
 		msgBody += "Task: " + t.mTaskContent + " Priority: " + t.mPriority + "\n"; 
@@ -51,9 +51,9 @@ public class MailAllTasks extends HttpServlet {
 
 	try {
 		Message msg = new MimeMessage(session);
-		msg.setFrom(new InternetAddress("yourList@todolist.com", "todolist emailer"));
+		msg.setFrom(new InternetAddress("pgerlich94@gmail.com"));
 		msg.addRecipient(Message.RecipientType.TO,
-						 new InternetAddress(user.getEmail(), user.getNickname()));
+						 new InternetAddress(user.getEmail()));
 		msg.setSubject("To-do list for " + user.getNickname());
 		msg.setText(msgBody);
 		Transport.send(msg);
