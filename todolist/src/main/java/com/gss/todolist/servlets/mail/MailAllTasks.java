@@ -39,10 +39,10 @@ public class MailAllTasks extends HttpServlet {
     
 	//Grab each task
 	List<Task> tasks = ObjectifyService.ofy().load().type(Task.class).order("-mPriority").filter("mUserId", user.getUserId()).list();
-	String msgBody = "test";
+	String msgBody = "To Do List: \n";
 	
 	for (Task t : tasks ) {
-		msgBody += "Task: " + t.mTaskContent + " Priority: " + t.mPriority + "\n"; 
+		msgBody += "Task: " + t.mTaskContent + " -- Priority: " + t.mPriority + "\n"; 
 	}
 	
 	//Setup properties and send mail
