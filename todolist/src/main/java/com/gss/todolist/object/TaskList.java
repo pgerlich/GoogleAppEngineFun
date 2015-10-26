@@ -16,7 +16,7 @@ public class TaskList {
 	//Name of post
 	public String mName;
 
-	//User that this id is associated to
+	//User that this category is associated to
 	@Index public String mUserId;
 	
 	//General Constructor (Isn't used)

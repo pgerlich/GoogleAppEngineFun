@@ -21,7 +21,7 @@ import com.googlecode.objectify.ObjectifyService;
 import com.gss.todolist.objects.Task;
 
 /**
- * Servlet used to add a new task to a category for a user
+ * Servlet used to update a task
  */
 public class UpdateTaskServlet extends HttpServlet {
 
@@ -30,8 +30,8 @@ public class UpdateTaskServlet extends HttpServlet {
   public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
     Task task;
 	
-	//Grab params
 	try { 
+		//Grab params
 		long id = Long.valueOf(req.getParameter("id"));
 		String newVal = req.getParameter("newVal");
 		int newPriority = Integer.valueOf(req.getParameter("newPriority"));

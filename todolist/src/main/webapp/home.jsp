@@ -35,7 +35,7 @@
 	boolean debugging = false;
 %>
 
-<!-- Static navbar -->
+	<!-- Static navbar -->
     <nav class="navbar navbar-default navbar-static-top">
       <div class="container">
         <div class="navbar-header">
@@ -73,7 +73,7 @@
 	} else {
 %>
 
-<!-- End login display section -->
+<!-- End force login section -->
 <%
 	//Grab each task category for this user
 	List<Task> tasks = ObjectifyService.ofy()
@@ -154,6 +154,7 @@
 	
 	<input type="hidden" name="updatedId" id="updatedId" value="" />
 </div>
+
 <!-- JQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>

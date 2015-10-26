@@ -53,7 +53,7 @@ function showUpdateTaskDialog(id, updatedContent, updatedPriority){
 	$( "#update-task-dialog" ).dialog( "open" );	
 }
 
-//Function for completing a task
+//Function for sending mail
 function mailTasks(){
 	$.post( "/mailtasks")
 	  .done(function( data ) {

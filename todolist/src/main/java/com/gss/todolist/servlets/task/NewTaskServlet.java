@@ -21,7 +21,7 @@ import com.googlecode.objectify.ObjectifyService;
 import com.gss.todolist.objects.Task;
 
 /**
- * Servlet used to add a new task to a category for a user
+ * Servlet used to add a new task 
  */
 public class NewTaskServlet extends HttpServlet {
 
